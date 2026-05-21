@@ -55,7 +55,7 @@ export const projects: ProjectItem[] = [
     description: "Plataforma de delivery com busca, filtros por categoria e grid de restaurantes com avaliações.",
     link: "/projetos/food-app",
     tags: ["React", "Next.js", "UI/UX"],
-    image: "",
+    image: "/preview-foodapp.png",
   },
   {
     id: "travel",
@@ -64,7 +64,7 @@ export const projects: ProjectItem[] = [
     description: "Landing page completa para agência de viagens com destinos, serviços, depoimentos e newsletter.",
     link: "/projetos/travel",
     tags: ["Next.js", "Landing Page", "Responsivo"],
-    image: "",
+    image: "/preview-travel.png",
   },
   {
     id: "burger",
