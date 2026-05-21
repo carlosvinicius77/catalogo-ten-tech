@@ -5,6 +5,7 @@ export type Project = {
   link: string;
   tags: string[];
   image?: string;
+  featured?: boolean;
 };
 
 export type Category = {
@@ -27,6 +28,17 @@ export const categories: Category[] = [
 export type ProjectItem = Project & { category: string };
 
 export const projects: ProjectItem[] = [
+  {
+    id: "gs-destaque",
+    category: "gestao",
+    featured: true,
+    title: "TenTech Gestão — Assistência Técnica",
+    description:
+      "Sistema completo de gestão para assistência técnica: controle de ordens de serviço, clientes, estoque, financeiro e relatórios em tempo real.",
+    link: "https://assistencia-tecnica-app.vercel.app/",
+    tags: ["Next.js", "Dashboard", "Gestão", "React"],
+    image: "",
+  },
   {
     id: "s1",
     category: "sites",
