@@ -40,6 +40,15 @@ export const projects: ProjectItem[] = [
     image: "",
   },
   {
+    id: "burger-delivery",
+    category: "sites",
+    title: "Green Food — Delivery de Burger",
+    description: "Landing page moderna para delivery com hero impactante, badge de desconto e botão de pedido.",
+    link: "/projetos/burger-delivery",
+    tags: ["Next.js", "Landing Page", "Food"],
+    image: "/preview-burger-delivery.png",
+  },
+  {
     id: "food-app",
     category: "sites",
     title: "FoodApp — Delivery",
