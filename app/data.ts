@@ -40,6 +40,15 @@ export const projects: ProjectItem[] = [
     image: "",
   },
   {
+    id: "defi-farm",
+    category: "sites",
+    title: "YieldX — DeFi Yield Farming",
+    description: "Plataforma DeFi cyberpunk com calculadora APY interativa, pools de liquidez, tokenomics e wallet connect.",
+    link: "/projetos/defi-farm",
+    tags: ["Web3", "DeFi", "Cyberpunk", "Next.js"],
+    image: "/preview-defi.png",
+  },
+  {
     id: "burger-delivery",
     category: "sites",
     title: "Green Food — Delivery de Burger",
