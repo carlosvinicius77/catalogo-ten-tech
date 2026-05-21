@@ -1,171 +1,270 @@
 "use client";
 import Link from "next/link";
 
-const ORANGE = "#FF6B00";
-const BG     = "#1a0900";
-
 export default function BurgerDelivery() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        .bd { font-family: 'Poppins', sans-serif; background: ${BG}; color: #fff; min-height: 100vh; overflow-x: hidden; }
-        .bd a { text-decoration: none; }
 
-        /* ── HUASHU ANIMATIONS ── */
-        @keyframes bd-fadeUp  { from { opacity:0; transform:translateY(28px) } to { opacity:1; transform:translateY(0) } }
-        @keyframes bd-fadeIn  { from { opacity:0 } to { opacity:1 } }
-        @keyframes bd-scaleIn { from { opacity:0; transform:scale(.94) } to { opacity:1; transform:scale(1) } }
-        @keyframes bd-badgePop{ from { opacity:0; transform:scale(.6) rotate(-10deg) } to { opacity:1; transform:scale(1) rotate(0deg) } }
+        .bd {
+          font-family: 'Poppins', sans-serif;
+          background: #0f0500;
+          color: #fff;
+          min-height: 100vh;
+          overflow-x: hidden;
+        }
+        .bd a { text-decoration: none; color: inherit; }
 
-        .bd-anim-trust   { animation: bd-fadeIn  .6s ease both; animation-delay: .15s }
-        .bd-anim-title   { animation: bd-fadeUp  .7s ease both; animation-delay: .25s }
-        .bd-anim-sub     { animation: bd-fadeUp  .7s ease both; animation-delay: .4s }
-        .bd-anim-btns    { animation: bd-fadeUp  .7s ease both; animation-delay: .55s }
-        .bd-anim-img     { animation: bd-scaleIn .9s ease both; animation-delay: .2s }
-        .bd-anim-badge   { animation: bd-badgePop .6s cubic-bezier(.34,1.56,.64,1) both; animation-delay: .7s }
+        /* ── huashu animations ── */
+        @keyframes fadeUp  { from { opacity:0; transform:translateY(30px) } to { opacity:1; transform:translateY(0) } }
+        @keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
+        @keyframes scaleIn { from { opacity:0; transform:scale(.93) } to { opacity:1; transform:scale(1) } }
+        @keyframes popIn   { from { opacity:0; transform:scale(.5) rotate(-15deg) } to { opacity:1; transform:scale(1) rotate(0deg) } }
+        @keyframes float   { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-12px) } }
+
+        /* ── HERO (full page) ── */
+        .bd-page {
+          position: relative;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+
+        /* fundo atmosférico warm/dark */
+        .bd-page::before {
+          content: '';
+          position: absolute; inset: 0; z-index: 0;
+          background:
+            radial-gradient(ellipse 60% 80% at 72% 60%, #3d1200 0%, transparent 65%),
+            radial-gradient(ellipse 40% 50% at 20% 40%, #1a0800 0%, transparent 60%),
+            linear-gradient(160deg, #100400 0%, #0f0500 40%, #180800 100%);
+        }
+        /* vinheta nas bordas */
+        .bd-page::after {
+          content: '';
+          position: absolute; inset: 0; z-index: 0;
+          background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(0,0,0,.55) 100%);
+          pointer-events: none;
+        }
 
         /* ── NAV ── */
-        .bd-nav { display:flex; align-items:center; justify-content:space-between; padding:0 72px; height:72px; position:relative; z-index:10; }
-        .bd-nav-links { display:flex; gap:40px; }
-        .bd-nav-link { color:rgba(255,255,255,.72); font-size:15px; font-weight:500; transition:color .2s; }
-        .bd-nav-link:hover { color:#fff; }
-        .bd-nav-link.active { color:#fff; font-weight:600; }
-        .bd-search-btn { background:${ORANGE}; border:none; border-radius:999px; padding:10px 22px; color:#fff; font-size:14px; font-family:inherit; cursor:pointer; display:flex; align-items:center; gap:8px; transition:all .2s; }
-        .bd-search-btn:hover { background:#e05e00; transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,107,0,.4); }
-
-        /* ── HERO ── */
-        .bd-hero { display:grid; grid-template-columns:1fr 1fr; min-height:calc(100vh - 72px); align-items:center; padding:0 72px; position:relative; overflow:hidden; }
-        .bd-hero::before {
-          content:'';
-          position:absolute; inset:0;
-          background:radial-gradient(ellipse 75% 90% at 68% 55%, #3d1a06 0%, #1a0900 55%, #0d0400 100%);
-          z-index:0;
+        .bd-nav {
+          position: relative; z-index: 10;
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 0 72px; height: 72px;
+          animation: fadeIn .6s ease both;
         }
-        .bd-hero-left  { position:relative; z-index:2; padding-right:40px; }
-        .bd-hero-right { position:relative; z-index:2; display:flex; align-items:center; justify-content:center; }
+        .bd-logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; }
+        .bd-logo-icon { width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,#FF6B00,#FF9A3C); display:flex; align-items:center; justify-content:center; font-size:18px; }
+        .bd-links { display:flex; gap:44px; align-items:center; }
+        .bd-links a { font-size:15px; font-weight:500; color:rgba(255,255,255,.65); transition:color .2s; }
+        .bd-links a:hover, .bd-links a.on { color:#fff; }
+        .bd-search {
+          background:#FF6B00; border:none; border-radius:999px;
+          padding:10px 22px; color:#fff; font-size:14px; font-weight:600;
+          font-family:inherit; cursor:pointer;
+          display:flex; align-items:center; gap:8px;
+          transition:all .25s;
+          box-shadow:0 4px 18px rgba(255,107,0,.4);
+        }
+        .bd-search:hover { background:#e05e00; transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,107,0,.55); }
 
-        /* ── TRUST BADGE ── */
-        .bd-trust { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.16); border-radius:999px; padding:7px 16px; font-size:13px; color:rgba(255,255,255,.85); margin-bottom:22px; backdrop-filter:blur(6px); }
-
-        /* ── HEADING ── */
-        .bd-heading { font-size:clamp(32px,3.8vw,56px); font-weight:800; line-height:1.12; margin-bottom:16px; letter-spacing:-.02em; text-wrap:pretty; }
-        .bd-heading .orange { color:${ORANGE}; }
-
-        /* ── SUBTITLE ── */
-        .bd-subtitle { font-size:clamp(14px,1.1vw,16px); color:rgba(255,255,255,.58); line-height:1.75; max-width:400px; margin-bottom:34px; text-wrap:pretty; }
-
-        /* ── BUTTONS ── */
-        .bd-buttons { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-        .bd-btn-primary { background:${ORANGE}; border:none; border-radius:999px; padding:14px 34px; color:#fff; font-size:15px; font-weight:600; font-family:inherit; cursor:pointer; transition:all .25s; box-shadow:0 4px 16px rgba(255,107,0,.35); }
-        .bd-btn-primary:hover { background:#e05e00; transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,107,0,.5); }
-        .bd-btn-text { display:flex; align-items:center; gap:10px; color:#fff; font-size:15px; font-weight:500; cursor:pointer; background:none; border:none; font-family:inherit; transition:opacity .2s; }
-        .bd-btn-text:hover { opacity:.8; }
-        .bd-btn-play { width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,.14); display:flex; align-items:center; justify-content:center; font-size:11px; transition:background .2s; }
-        .bd-btn-text:hover .bd-btn-play { background:rgba(255,255,255,.22); }
-
-        /* ── HERO IMAGE ── */
-        .bd-img-wrap { position:relative; display:inline-block; }
-        .bd-hero-img { width:clamp(260px,42vw,560px); height:clamp(260px,42vw,560px); object-fit:cover; object-position:center; border-radius:20px; display:block; filter:drop-shadow(0 24px 64px rgba(0,0,0,.7)); }
-
-        /* ── DISCOUNT BADGE ── */
-        .bd-discount { position:absolute; top:-16px; right:-16px; width:96px; height:96px; background:linear-gradient(135deg,#FF8C00,${ORANGE}); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 8px 28px rgba(255,107,0,.5); border:3px solid rgba(255,255,255,.22); }
-        .bd-discount-pct   { font-size:26px; font-weight:800; line-height:1; }
-        .bd-discount-label { font-size:11px; font-weight:600; opacity:.92; }
-
-        /* ════════════════════
-           TABLET  ≤ 1024px
-        ════════════════════ */
-        @media (max-width:1024px) {
-          .bd-nav   { padding:0 32px; }
-          .bd-hero  { padding:48px 32px; grid-template-columns:1fr 1fr; gap:24px; min-height:auto; }
+        /* ── HERO CONTENT ── */
+        .bd-hero {
+          position: relative; z-index: 2;
+          flex: 1;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+          padding: 0 72px 60px;
+          gap: 0;
         }
 
-        /* ════════════════════
-           MOBILE  ≤ 640px
-        ════════════════════ */
-        @media (max-width:640px) {
-          .bd-nav              { padding:0 20px; height:60px; }
-          .bd-nav-links        { display:none; }
-          .bd-hero             { grid-template-columns:1fr; padding:32px 20px 48px; text-align:center; }
-          .bd-hero-left        { display:flex; flex-direction:column; align-items:center; padding-right:0; }
-          .bd-subtitle         { max-width:100%; }
-          .bd-hero-right       { margin-top:32px; }
-          .bd-hero-img         { width:min(340px,85vw); height:min(320px,80vw); }
-          .bd-discount         { top:-10px; right:-10px; width:80px; height:80px; }
-          .bd-discount-pct     { font-size:22px; }
+        /* left */
+        .bd-left { display:flex; flex-direction:column; }
+
+        .bd-badge {
+          display: inline-flex; align-items:center; gap:8px;
+          background:rgba(255,255,255,.08);
+          border:1px solid rgba(255,255,255,.15);
+          border-radius:999px; padding:7px 16px;
+          font-size:13px; color:rgba(255,255,255,.82);
+          margin-bottom:24px; backdrop-filter:blur(8px);
+          width:fit-content;
+          animation: fadeIn .6s ease .15s both;
+        }
+
+        .bd-h1 {
+          font-size: clamp(30px,3.8vw,54px);
+          font-weight: 800;
+          line-height: 1.12;
+          letter-spacing: -.02em;
+          margin-bottom: 18px;
+          text-wrap: pretty;
+          animation: fadeUp .7s ease .25s both;
+        }
+        .bd-h1 em { font-style:normal; color:#FF6B00; }
+
+        .bd-sub {
+          font-size: clamp(13px,1.1vw,15px);
+          color: rgba(255,255,255,.52);
+          line-height: 1.75;
+          max-width: 390px;
+          margin-bottom: 36px;
+          text-wrap: pretty;
+          animation: fadeUp .7s ease .38s both;
+        }
+
+        .bd-btns {
+          display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+          animation: fadeUp .7s ease .52s both;
+        }
+
+        .bd-btn-main {
+          background:#FF6B00; border:none; border-radius:999px;
+          padding:14px 36px; color:#fff; font-size:15px; font-weight:700;
+          font-family:inherit; cursor:pointer;
+          box-shadow:0 6px 20px rgba(255,107,0,.45);
+          transition:all .25s;
+        }
+        .bd-btn-main:hover { background:#e05e00; transform:translateY(-3px); box-shadow:0 12px 30px rgba(255,107,0,.6); }
+
+        .bd-btn-secondary {
+          display:flex; align-items:center; gap:12px;
+          background:none; border:none; color:#fff;
+          font-size:15px; font-weight:500; font-family:inherit; cursor:pointer;
+          transition:opacity .2s;
+        }
+        .bd-btn-secondary:hover { opacity:.75; }
+        .bd-play {
+          width:40px; height:40px; border-radius:50%;
+          background:rgba(255,255,255,.12);
+          display:flex; align-items:center; justify-content:center;
+          font-size:12px; transition:background .2s;
+        }
+        .bd-btn-secondary:hover .bd-play { background:rgba(255,255,255,.2); }
+
+        /* right — imagem flutua */
+        .bd-right {
+          position:relative;
+          display:flex; justify-content:center; align-items:center;
+          animation: scaleIn .9s ease .2s both;
+        }
+        .bd-burger-img {
+          width:clamp(260px,44vw,580px);
+          height:auto;
+          object-fit:cover;
+          filter:drop-shadow(0 30px 70px rgba(0,0,0,.8)) drop-shadow(0 0 60px rgba(100,30,0,.5));
+          animation: float 5s ease-in-out 1.2s infinite;
+        }
+
+        /* badge 60% */
+        .bd-disc {
+          position:absolute;
+          top: clamp(10px,8%,60px);
+          right: clamp(0px,6%,40px);
+          width:clamp(76px,7vw,100px);
+          height:clamp(76px,7vw,100px);
+          border-radius:50%;
+          background:linear-gradient(135deg,#FF8C00,#FF6B00);
+          border:3px solid rgba(255,255,255,.25);
+          display:flex; flex-direction:column; align-items:center; justify-content:center;
+          box-shadow:0 8px 28px rgba(255,107,0,.6), inset 0 1px 0 rgba(255,255,255,.2);
+          animation: popIn .6s cubic-bezier(.34,1.56,.64,1) .9s both;
+        }
+        .bd-disc-n { font-size:clamp(20px,2.2vw,28px); font-weight:800; line-height:1; }
+        .bd-disc-l { font-size:clamp(9px,.9vw,12px); font-weight:600; opacity:.92; }
+
+        /* ── TABLET ── */
+        @media (max-width:1024px){
+          .bd-nav { padding:0 32px; }
+          .bd-hero { padding:0 32px 48px; }
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width:640px){
+          .bd-nav { padding:0 20px; height:58px; }
+          .bd-links { display:none; }
+          .bd-hero { grid-template-columns:1fr; padding:20px 20px 48px; text-align:center; }
+          .bd-left { align-items:center; }
+          .bd-sub { max-width:100%; }
+          .bd-right { margin-top:28px; }
+          .bd-burger-img { width:min(320px,88vw); }
         }
       `}</style>
 
       <div className="bd">
+        <div className="bd-page">
 
-        {/* voltar */}
-        <div style={{ background:"rgba(0,0,0,.45)", borderBottom:"1px solid rgba(255,255,255,.07)", padding:"7px 24px" }}>
-          <Link href="/" style={{ color:ORANGE, fontSize:11, letterSpacing:1.5 }}>← VOLTAR AO CATÁLOGO</Link>
-        </div>
-
-        {/* ══════ NAV ══════ */}
-        <nav className="bd-nav">
-          <div style={{ display:"flex", alignItems:"center", gap:8 }}>
-            <div style={{ width:34, height:34, borderRadius:9, background:`linear-gradient(135deg,${ORANGE},#FFB347)`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:17 }}>🍔</div>
-            <span style={{ fontWeight:700, fontSize:17 }}>Green Food</span>
+          {/* voltar */}
+          <div style={{ position:"relative", zIndex:10, background:"rgba(0,0,0,.4)", borderBottom:"1px solid rgba(255,255,255,.06)", padding:"7px 24px" }}>
+            <Link href="/" style={{ color:"#FF6B00", fontSize:11, letterSpacing:1.5, fontWeight:600 }}>← VOLTAR AO CATÁLOGO</Link>
           </div>
 
-          <div className="bd-nav-links">
-            <a href="#" className="bd-nav-link active">Home</a>
-            <a href="#" className="bd-nav-link">Foods</a>
-            <a href="#" className="bd-nav-link">Offers</a>
-            <a href="#" className="bd-nav-link">Contact us</a>
-          </div>
-
-          <button className="bd-search-btn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-            Search
-          </button>
-        </nav>
-
-        {/* ══════ HERO ══════ */}
-        <section className="bd-hero">
-          {/* left */}
-          <div className="bd-hero-left">
-            <div className="bd-trust bd-anim-trust">
-              <span>😊</span> people trust us
+          {/* ══ NAV ══ */}
+          <nav className="bd-nav">
+            <div className="bd-logo">
+              <div className="bd-logo-icon">🍔</div>
+              Green Food
             </div>
-
-            <h1 className="bd-heading bd-anim-title">
-              <span className="orange">Most Fastest Food</span><br/>
-              Delivery Service
-            </h1>
-
-            <p className="bd-subtitle bd-anim-sub">
-              Get the best quality and most delicious burgers in the world you can get then all at Green Food...
-            </p>
-
-            <div className="bd-buttons bd-anim-btns">
-              <button className="bd-btn-primary">Order Food</button>
-              <button className="bd-btn-text">
-                <span className="bd-btn-play">▶</span>
-                View menu
-              </button>
+            <div className="bd-links">
+              <a href="#" className="on">Home</a>
+              <a href="#">Foods</a>
+              <a href="#">Offers</a>
+              <a href="#">Contact us</a>
             </div>
-          </div>
+            <button className="bd-search">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              Search
+            </button>
+          </nav>
 
-          {/* right */}
-          <div className="bd-hero-right bd-anim-img">
-            <div className="bd-img-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/burger-delivery-hero.jpg" alt="Burger" className="bd-hero-img" />
-              <div className="bd-discount bd-anim-badge">
-                <span className="bd-discount-pct">60%</span>
-                <span className="bd-discount-label">Discount</span>
+          {/* ══ HERO ══ */}
+          <section className="bd-hero">
+            <div className="bd-left">
+              <div className="bd-badge">
+                <span>😊</span> people trust us
+              </div>
+
+              <h1 className="bd-h1">
+                <em>Most Fastest Food</em><br/>
+                Delivery Service
+              </h1>
+
+              <p className="bd-sub">
+                Get the best quality and most delicious burgers in the world. You can get them all at Green Food...
+              </p>
+
+              <div className="bd-btns">
+                <button className="bd-btn-main">Order Food</button>
+                <button className="bd-btn-secondary">
+                  <span className="bd-play">▶</span>
+                  View menu
+                </button>
               </div>
             </div>
-          </div>
-        </section>
 
+            <div className="bd-right">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/burger-delivery-hero.jpg"
+                alt="Burger"
+                className="bd-burger-img"
+              />
+              <div className="bd-disc">
+                <span className="bd-disc-n">60%</span>
+                <span className="bd-disc-l">Discount</span>
+              </div>
+            </div>
+          </section>
+
+        </div>
       </div>
     </>
   );
