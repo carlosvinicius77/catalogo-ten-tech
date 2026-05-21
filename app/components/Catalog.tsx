@@ -195,9 +195,19 @@ function ProjectCard({ project }: { project: ProjectItem }) {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
+          overflow: "hidden",
         }}
       >
-        <span style={{ fontSize: 48 }}>{categoryIcons[project.category]}</span>
+        {project.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.image}
+            alt={project.title}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        ) : (
+          <span style={{ fontSize: 48 }}>{categoryIcons[project.category]}</span>
+        )}
         <div
           style={{
             position: "absolute",

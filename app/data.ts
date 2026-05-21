@@ -64,7 +64,7 @@ export const projects: ProjectItem[] = [
     description: "Site dark e moderno para hamburgueria com cardápio visual, marquee animado e CTA impactante.",
     link: "/projetos/burger-heaven",
     tags: ["Next.js", "Dark Theme", "Animação"],
-    image: "",
+    image: "/preview-burger.png",
   },
   {
     id: "s1",
