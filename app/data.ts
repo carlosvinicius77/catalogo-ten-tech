@@ -40,6 +40,15 @@ export const projects: ProjectItem[] = [
     image: "",
   },
   {
+    id: "fitness",
+    category: "sites",
+    title: "FitZone — App de Fitness",
+    description: "Landing page fitness dark com treinos, progress tracking, perfis de instrutores e planos de assinatura.",
+    link: "/projetos/fitness",
+    tags: ["Next.js", "Dark Mode", "Fitness", "App"],
+    image: "/preview-fitness.png",
+  },
+  {
     id: "defi-farm",
     category: "sites",
     title: "YieldX — DeFi Yield Farming",
