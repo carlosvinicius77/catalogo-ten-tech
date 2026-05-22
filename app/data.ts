@@ -37,7 +37,7 @@ export const projects: ProjectItem[] = [
       "Sistema completo de gestão para assistência técnica: controle de ordens de serviço, clientes, estoque, financeiro e relatórios em tempo real.",
     link: "https://assistencia-tecnica-app.vercel.app/",
     tags: ["Next.js", "Dashboard", "Gestão", "React"],
-    image: "",
+    image: "/preview-gestao.png",
   },
   {
     id: "juridico",

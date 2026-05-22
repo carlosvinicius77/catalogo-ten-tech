@@ -52,11 +52,17 @@ function FeaturedCard({ project }: { project: ProjectItem }) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: 32,
+          padding: project.image ? 0 : 32,
           gap: 12,
           position: "relative",
+          overflow: "hidden",
         }}
       >
+        {project.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={project.image} alt={project.title}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+        )}
         {/* Destaque badge */}
         <div
           style={{
