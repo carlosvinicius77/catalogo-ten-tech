@@ -40,15 +40,6 @@ export const projects: ProjectItem[] = [
     image: "/preview-gestao.png",
   },
   {
-    id: "viniburgers",
-    category: "sites",
-    title: "ViniBurgers — Hamburgeria Artesanal",
-    description: "Landing page de alta conversão para hamburgeria local em Campinas, SP. Copy completo com 11 seções, cardápio, FAQs, prova social e CTA otimizado para delivery.",
-    link: "/projetos/viniburgers",
-    tags: ["Next.js", "Landing Page", "Food", "Conversão"],
-    image: "/preview-viniburgers.png",
-  },
-  {
     id: "hamburgeria-retro",
     category: "sites",
     title: "RetroBurger — Hamburgeria Retrô-Futurista",
