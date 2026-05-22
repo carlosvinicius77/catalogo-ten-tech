@@ -40,6 +40,15 @@ export const projects: ProjectItem[] = [
     image: "/preview-gestao.png",
   },
   {
+    id: "acazis",
+    category: "sites",
+    title: "Acazis — Loja de Roupas",
+    description: "Landing page editorial luxury para loja de moda com tipografia Playfair, imagens em escala de cinza, animações cinematográficas e design minimalista.",
+    link: "/projetos/acazis",
+    tags: ["Next.js", "Fashion", "Luxury", "Editorial"],
+    image: "/preview-acazis.png",
+  },
+  {
     id: "juridico",
     category: "sites",
     title: "Matos & Sousa — Advocacia",
