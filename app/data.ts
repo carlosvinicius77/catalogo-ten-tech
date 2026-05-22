@@ -40,6 +40,15 @@ export const projects: ProjectItem[] = [
     image: "/preview-gestao.png",
   },
   {
+    id: "hamburgeria-retro",
+    category: "sites",
+    title: "RetroBurger — Hamburgeria Retrô-Futurista",
+    description: "Landing page estilo Retro-Futurista 80s com neon, grid lines, cardápio interativo, marquee animado e atmosfera synthwave.",
+    link: "/projetos/hamburgeria-retro",
+    tags: ["Next.js", "Retro-Futurista", "Neon", "Food"],
+    image: "/preview-hamburgeria-retro.png",
+  },
+  {
     id: "acazis",
     category: "sites",
     title: "Acazis — Loja de Roupas",
