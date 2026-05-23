@@ -40,6 +40,15 @@ export const projects: ProjectItem[] = [
     image: "/preview-gestao.png",
   },
   {
+    id: "hamburgueria-do-super",
+    category: "sites",
+    title: "Hamburgueria do Super — Temática Super-Heróis",
+    description: "Landing page para hamburgueria com tema super-heróis: cardápio interativo por categorias, cupons com copy, montador de burger com preço dinâmico e menu mobile.",
+    link: "/projetos/hamburgueria-do-super",
+    tags: ["Next.js", "Food", "Comic Book", "Responsivo"],
+    image: "/preview-hamburgueria-super.png",
+  },
+  {
     id: "hamburgeria-retro",
     category: "sites",
     title: "RetroBurger — Hamburgeria Retrô-Futurista",
