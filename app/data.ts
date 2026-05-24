@@ -87,6 +87,17 @@ export const projects: ProjectItem[] = [
     image: "/preview-acazis.png",
   },
   {
+    id: "advocacia-alves",
+    category: "sites",
+    featured: true,
+    title: "Alves & Associados — Escritório de Advocacia",
+    description:
+      "Landing page premium para escritório de advocacia: navy + dourado, hero impactante, 6 áreas de atuação, sobre o escritório, processo em 3 passos, contato com mapa e botão WhatsApp flutuante.",
+    link: "/projetos/advocacia-alves",
+    tags: ["Next.js", "Advocacia", "Jurídico", "Premium", "Responsivo"],
+    image: "/preview-advocacia-alves.png",
+  },
+  {
     id: "juridico",
     category: "sites",
     title: "Matos & Sousa — Advocacia",
