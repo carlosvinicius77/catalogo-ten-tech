@@ -312,11 +312,10 @@ export default function Catalog() {
   const [activeCategory, setActiveCategory] = useState("todos");
   const [search, setSearch] = useState("");
 
-  const featuredProject = projects.find((p) => p.featured);
+  const allFeatured = projects.filter((p) => p.featured);
 
   const filtered = useMemo(() => {
     return projects.filter((p) => {
-      if (p.featured) return false;
       const matchCat = activeCategory === "todos" || p.category === activeCategory;
       const q = search.toLowerCase();
       const matchSearch =
@@ -328,13 +327,15 @@ export default function Catalog() {
     });
   }, [activeCategory, search]);
 
-  const showFeatured =
-    featuredProject &&
-    (activeCategory === "todos" ||
-      activeCategory === featuredProject.category) &&
-    (!search ||
-      featuredProject.title.toLowerCase().includes(search.toLowerCase()) ||
-      featuredProject.description.toLowerCase().includes(search.toLowerCase()));
+  const visibleFeatured = allFeatured.filter(
+    (p) =>
+      (activeCategory === "todos" || activeCategory === p.category) &&
+      (!search ||
+        p.title.toLowerCase().includes(search.toLowerCase()) ||
+        p.description.toLowerCase().includes(search.toLowerCase()) ||
+        p.tags.some((t) => t.toLowerCase().includes(search.toLowerCase())))
+  );
+  const showFeatured = visibleFeatured.length > 0;
 
   return (
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px 60px" }}>
@@ -424,19 +425,19 @@ export default function Catalog() {
         </div>
       </div>
 
-      {/* Featured card */}
-      {showFeatured && featuredProject && (
-        <FeaturedCard project={featuredProject} />
-      )}
+      {/* Featured cards — todos os projetos em destaque */}
+      {showFeatured && visibleFeatured.map((p) => (
+        <FeaturedCard key={p.id} project={p} />
+      ))}
 
       {/* Results count */}
       <div style={{ marginBottom: 20, color: "#6b7280", fontSize: 14 }}>
-        {filtered.length + (showFeatured ? 1 : 0)} projeto
-        {filtered.length + (showFeatured ? 1 : 0) !== 1 ? "s" : ""} encontrado
-        {filtered.length + (showFeatured ? 1 : 0) !== 1 ? "s" : ""}
+        {filtered.length} projeto
+        {filtered.length !== 1 ? "s" : ""} encontrado
+        {filtered.length !== 1 ? "s" : ""}
       </div>
 
-      {/* Grid */}
+      {/* Grid — todos os projetos (incluindo featured, para aparecerem também na grade) */}
       {filtered.length > 0 ? (
         <div
           style={{
